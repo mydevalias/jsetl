@@ -1,3 +1,4 @@
+
 function ProcessorWrapper(params){
      eval("var tmpProcessor = function(line, lineIndex){"+params["source"]+";}");
      this.processRef = tmpProcessor;
@@ -34,7 +35,12 @@ function task(params){
        input: require("fs").createReadStream(params["in"])
     });
 
-    var proc = new ProcessorWrapper(params);
+    var proc = null;
+    if(params["processor"]){
+        eval("proc="+params["processor"])
+    } else{
+        proc = new ProcessorWrapper(params);
+    }
 
     proc.begin();
     var lineIndex = 0;
@@ -50,3 +56,4 @@ function task(params){
 
 var params = loadParams(process.argv);
 task(params);
+
