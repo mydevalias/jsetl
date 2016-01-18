@@ -1,6 +1,6 @@
 function loadParams(args){
    var params = {
-        "in.file": "",
+        "in": "",
         "source": "console.log(line)"
    }
     for(var i=2; i < args.length; i+=2){
@@ -12,7 +12,7 @@ function loadParams(args){
 var params = loadParams(process.argv);
 
 var lineReader = require("readline").createInterface({
-   input: require("fs").createReadStream(params["in.file"])
+   input: require("fs").createReadStream(params["in"])
 });
 
 var f = "var x = function(line){"+params["source"]+";}"
